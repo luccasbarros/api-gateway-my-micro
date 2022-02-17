@@ -25,7 +25,7 @@ export class AppController {
       transport: Transport.RMQ,
       options: {
         urls: ['amqp://user:pKEMejd4Jl0G@18.204.207.235:5672/walletilia'],
-        queue: 'wallet-backend',
+        queue: 'wallet-test',
       },
     });
   }
