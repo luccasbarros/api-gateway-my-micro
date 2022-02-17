@@ -12,7 +12,7 @@ import {
   ClientProxyFactory,
   Transport,
 } from '@nestjs/microservices';
-import { CreateCategoryDTO } from './dtos/create-category.dto';
+import { CreateTransactionDTO } from './dtos/create-transaction.dto';
 
 @Controller('api/v1')
 export class AppController {
@@ -24,15 +24,18 @@ export class AppController {
     this.clientWalletBackend = ClientProxyFactory.create({
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://user:pKEMejd4Jl0G@18.204.207.235:5672/smartranking'],
+        urls: ['amqp://user:pKEMejd4Jl0G@18.204.207.235:5672/walletilia'],
         queue: 'wallet-backend',
       },
     });
   }
 
-  @Post('category')
+  @Post('transaction')
   @UsePipes(ValidationPipe)
-  async createSomething(@Body() createCategoryDTO: CreateCategoryDTO) {
-    return this.clientWalletBackend.emit('create-category', createCategoryDTO);
+  async createSomething(@Body() createTransactionDTO: CreateTransactionDTO) {
+    return this.clientWalletBackend.emit(
+      'create-transaction',
+      createTransactionDTO,
+    );
   }
 }
