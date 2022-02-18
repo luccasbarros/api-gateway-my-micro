@@ -24,7 +24,9 @@ export class AppController {
     this.clientWalletBackend = ClientProxyFactory.create({
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://user:pKEMejd4Jl0G@18.204.207.235:5672/walletilia'],
+        urls: [
+          `amqp://user:${process.env.RMQ_CREDENTIAL}@${process.env.RMQ_ACCESS}/walletilia`,
+        ],
         queue: 'wallet-test',
       },
     });
