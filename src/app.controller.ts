@@ -4,6 +4,7 @@ import {
   Get,
   Logger,
   Post,
+  Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
@@ -12,6 +13,7 @@ import {
   ClientProxyFactory,
   Transport,
 } from '@nestjs/microservices';
+import { Observable } from 'rxjs';
 import { CreateTransactionDTO } from './dtos/create-transaction.dto';
 
 @Controller('api/v1')
@@ -34,10 +36,16 @@ export class AppController {
 
   @Post('transaction')
   @UsePipes(ValidationPipe)
-  async createSomething(@Body() createTransactionDTO: CreateTransactionDTO) {
+  createSomething(@Body() createTransactionDTO: CreateTransactionDTO) {
     return this.clientWalletBackend.emit(
       'create-transaction',
       createTransactionDTO,
     );
+  }
+
+  @Get('transaction')
+  @UsePipes(ValidationPipe)
+  listTransactions(@Query('transactionId') id: string): Observable<any> {
+    return this.clientWalletBackend.send('list-transactions', id ? id : '');
   }
 }
