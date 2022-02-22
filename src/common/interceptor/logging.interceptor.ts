@@ -12,6 +12,8 @@ export class LoggingInterceptor implements NestInterceptor {
     context: ExecutionContext,
     next: CallHandler<any>,
   ): Observable<any> | Promise<Observable<any>> {
+    // to verify request time
+
     console.log('Antes');
     const now = Date.now();
 
