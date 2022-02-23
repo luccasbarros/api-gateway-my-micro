@@ -10,7 +10,6 @@ import { TransactionsModule } from './transactions/transactions.module';
     TransactionsModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env',
     }),
   ],
   controllers: [],
