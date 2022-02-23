@@ -22,7 +22,7 @@ export class TransactionsController {
 
   @Post('transaction')
   @UsePipes(ValidationPipe)
-  createSomething(@Body() createTransactionDTO: CreateTransactionDTO) {
+  storeTransaction(@Body() createTransactionDTO: CreateTransactionDTO) {
     return this.clientAdminBackend.emit(
       'create-transaction',
       createTransactionDTO,
