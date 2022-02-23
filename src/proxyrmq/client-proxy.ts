@@ -13,7 +13,7 @@ export class ClientProxyWallet {
   getClientProxyInstance(): ClientProxy {
     const RMQ_CREDENTIAL = this.configService.get<string>('RMQ_CREDENTIAL');
     const RMQ_ACCESS = this.configService.get<string>('RMQ_ACCESS');
-    const RMQ_USER = this.configService.get<string>('RMQ_ACCESS');
+    const RMQ_USER = this.configService.get<string>('RMQ_USER');
 
     return ClientProxyFactory.create({
       transport: Transport.RMQ,

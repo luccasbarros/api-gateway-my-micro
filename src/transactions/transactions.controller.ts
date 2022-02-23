@@ -8,6 +8,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { ApiResponse } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { ClientProxyWallet } from 'src/proxyrmq/client-proxy';
 import { CreateTransactionDTO } from './dtos/create-transaction.dto';
@@ -22,6 +23,10 @@ export class TransactionsController {
 
   @Post('transaction')
   @UsePipes(ValidationPipe)
+  @ApiResponse({
+    status: 201,
+    description: 'Transaction has stored successfully',
+  })
   storeTransaction(@Body() createTransactionDTO: CreateTransactionDTO) {
     return this.clientAdminBackend.emit(
       'create-transaction',
